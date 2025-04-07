@@ -6,8 +6,10 @@ let
     
     //made by me
     #"Valor Substituido" = Table.ReplaceValue(#"Tipo Alterado", "?", "45", Replacer.ReplaceText,{"Idade"}),
+    
+    #"Tipo Ajustado" = Table.TransformColumnTypes(#"Valor Substituido", {{"Idade", Int64.Type}}),
 
-    #"Coluna Removida" = Table.RemoveColumns(#"Valor Substituido",("Estado Civil")),
+    #"Coluna Removida" = Table.RemoveColumns(#"Tipo Ajustado",("Estado Civil")),
 
     #"Coluna Adicionada" = Table.AddColumn(#"Coluna Removida", "Valor Final", each[Valor Compra] - [Valor Desconto]),
 
